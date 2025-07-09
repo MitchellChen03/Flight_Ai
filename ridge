@@ -1,0 +1,65 @@
+import pandas as pd
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.pipeline import make_pipeline
+from sklearn.compose import ColumnTransformer
+import matplotlib.pyplot as plt
+
+# Load merged dataset
+df = pd.read_csv(r"C:\Users\mitch\OneDrive\Desktop\flight\merged_flight_weather.csv")
+
+# Define features and target
+features = [
+    'Origin', 'Dest', 'CRSDepTime', 'CRSArrTime',
+    'temperature_c', 'precip_mm', 'cloud_pct', 'wind_speed_mps',
+    'Distance', 'LateAircraftDelay', 'WeatherDelay'
+]
+target = 'DepDelay'
+
+X = df[features].copy()
+y = df[target]
+
+# Convert times to minutes after midnight
+def to_minutes(t): return (t // 100) * 60 + (t % 100)
+X.loc[:, 'CRSDepTime'] = X['CRSDepTime'].apply(to_minutes)
+X.loc[:, 'CRSArrTime'] = X['CRSArrTime'].apply(to_minutes)
+
+# Preprocessing
+categorical_features = ['Origin', 'Dest']
+numerical_features = [
+    'CRSDepTime', 'CRSArrTime',
+    'temperature_c', 'precip_mm', 'cloud_pct', 'wind_speed_mps',
+    'Distance', 'LateAircraftDelay', 'WeatherDelay'
+]
+
+preprocessor = ColumnTransformer([
+    ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
+], remainder='passthrough')
+
+# Ridge Regression pipeline
+model = make_pipeline(preprocessor, Ridge(alpha=1.5))
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=50)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+# Evaluate
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print("Mean Squared Error:", round(mse, 2))
+print("R² Score:", round(r2, 2))
+
+# Show 10 predictions
+sample = X_test.copy()
+sample['Actual_Delay'] = y_test
+sample['Predicted_Delay'] = y_pred
+print(sample.head(10))
+
+# Plot actual vs predicted
+plt.scatter(y_test, y_pred, alpha=0.3)
+plt.xlabel("Actual Delay")
+plt.ylabel("Predicted Delay")
+plt.title("Actual vs Predicted Departure Delays")
+plt.grid(True)
+plt.show()

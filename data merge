@@ -1,0 +1,51 @@
+import pandas as pd
+
+# Load flight data
+flight_path = r"C:\Users\mitch\OneDrive\Desktop\flight\united_airlines_flights.csv"
+df = pd.read_csv(flight_path, low_memory=False)
+
+# Keep only necessary columns (edit as needed)
+df = df[['Origin', 'Dest', 'CRSDepTime', 'CRSArrTime', 'DepDelay', 'FlightDate',
+         'Distance', 'LateAircraftDelay', 'WeatherDelay']]
+df = df.dropna()
+df['FlightDate'] = pd.to_datetime(df['FlightDate'])
+df['day'] = df['FlightDate'].dt.day
+df['month'] = df['FlightDate'].dt.month
+df['hour'] = df['CRSDepTime'] // 100
+
+# Map airports to cities
+airport_to_city = {
+    'ORD': 'Chicago', 'EWR': 'New York', 'JFK': 'New York', 'LGA': 'New York',
+    'SFO': 'San Francisco', 'LAX': 'Los Angeles', 'IAH': 'Houston', 'DEN': 'Denver',
+    'IAD': 'Washington', 'SEA': 'Seattle', 'CLT': 'Charlotte', 'MIA': 'Miami',
+    'PHX': 'Phoenix', 'BOS': 'Boston', 'ATL': 'Atlanta', 'CLE': 'Cleveland',
+    'MSP': 'Minneapolis', 'DTW': 'Detroit', 'MCO': 'Orlando', 'BDL': 'Hartford',
+    'RSW': 'Fort Myers', 'KOA': 'Kailua-Kona', 'SAN': 'San Diego', 'MSN': 'Madison',
+    'LAS': 'Las Vegas', 'SLC': 'Salt Lake City', 'HNL': 'Honolulu', 'TPA': 'Tampa',
+    'AUS': 'Austin', 'STL': 'St. Louis', 'SMF': 'Sacramento', 'PDX': 'Portland',
+    'OMA': 'Omaha', 'BNA': 'Nashville', 'ANC': 'Anchorage', 'TUS': 'Tucson',
+    'SJC': 'San Jose', 'CMH': 'Columbus', 'BWI': 'Baltimore', 'RDU': 'Raleigh',
+    'OKC': 'Oklahoma City', 'SNA': 'Santa Ana', 'ONT': 'Ontario', 'IND': 'Indianapolis'
+}
+df['OriginCity'] = df['Origin'].map(airport_to_city)
+
+# Load weather data
+weather = pd.read_csv(r"C:\Users\mitch\Downloads\us_weather_jan2025.csv")
+weather['time'] = pd.to_datetime(weather['time'])
+weather['day'] = weather['time'].dt.day
+weather['month'] = weather['time'].dt.month
+weather['hour'] = weather['time'].dt.hour
+weather.rename(columns={'city': 'OriginCity'}, inplace=True)
+weather = weather[['OriginCity', 'hour', 'day', 'month',
+                   'temperature_c', 'precip_mm', 'cloud_pct', 'wind_speed_mps']]
+
+# Merge weather into flights
+merged_df = pd.merge(df, weather, on=['OriginCity', 'hour', 'day', 'month'], how='left')
+
+# Drop rows missing any key data
+merged_df = merged_df.dropna(subset=[
+    'temperature_c', 'precip_mm', 'cloud_pct', 'wind_speed_mps',
+    'Distance', 'LateAircraftDelay', 'WeatherDelay'
+])
+
+print("Total rows in merged dataset:", df.shape[0])
