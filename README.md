@@ -206,19 +206,5 @@ The model uses 77 engineered features including:
 3. **Dashboard**: Operational monitoring
 4. **Integration**: Existing airline systems
 
-## 📝 License
-
-This project is for educational and demonstration purposes. The United Airlines branding and data are used for illustrative purposes only.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📞 Contact
-
-For questions or support, please open an issue on GitHub.
-
----
 
 
-**Note**: This demo uses simulated predictions for demonstration purposes. In a production environment, it would connect to the actual trained machine learning model. 
