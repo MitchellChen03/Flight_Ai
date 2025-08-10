@@ -1,59 +1,59 @@
-✈ United Airlines Flight Delay Prediction
-A machine learning application that predicts departure delays for United Airlines flights using historical flight data and weather conditions — providing accurate, data-driven insights for passengers, airlines, and airports.
+# ✈ United Airlines Flight Delay Prediction
 
-🌐 Live Demo
-🔗 View Demo
+A **machine learning application** that predicts departure delays for United Airlines flights using **historical flight data** and **weather conditions** — providing accurate, data-driven insights for passengers, airlines, and airports.
 
-📊 Model Overview
-Metric	Value
-R² (Accuracy)	73.9%
-RMSE	7.04 min
-MAE	4.69 min
-Dataset Size	69,827 flights
-Features	77 engineered
+---
 
-🚀 Key Features
-Model Capabilities
-📍 Route Analysis – Historical delay patterns by origin/destination
+## 🌐 Live Demo  
+🔗 [View Demo](https://mitchellchen03.github.io/Flight_Ai/)
 
-🌦 Weather Integration – Impact of temperature, precipitation, and wind speed
+---
 
-🕒 Time Patterns – Peak hours, weekends, seasonal variations
+## 📊 Model Overview  
 
-🛫 Hub Connections – Performance at United Airlines hubs (ORD, DEN, IAH, etc.)
+| Metric              | Value         |
+|--------------------|--------------|
+| **R² (Accuracy)**  | **73.9%**    |
+| **RMSE**           | **7.04 min** |
+| **MAE**            | **4.69 min** |
+| **Dataset Size**   | 69,827 flights |
+| **Features**       | 77 engineered |
 
-⚙ Operational Factors – Flight duration, distance, and delay type analysis
+---
 
-Demo Website
-📝 Interactive flight input form
+## 🚀 Key Features  
 
-⚡ Real-time delay predictions
+### **Model Capabilities**
+- 📍 **Route Analysis** – Historical delay patterns by origin/destination  
+- 🌦 **Weather Integration** – Impact of temperature, precipitation, and wind speed  
+- 🕒 **Time Patterns** – Peak hours, weekends, seasonal variations  
+- 🛫 **Hub Connections** – Performance at United Airlines hubs (ORD, DEN, IAH, etc.)  
+- ⚙ **Operational Factors** – Flight duration, distance, and delay type analysis  
 
-🌦 Weather condition inputs
+### **Demo Website**
+- 📝 Interactive flight input form  
+- ⚡ Real-time delay predictions  
+- 🌦 Weather condition inputs  
+- 📱 Mobile-responsive design  
+- 🎨 Color-coded results by delay severity  
 
-📱 Mobile-responsive design
+---
 
-🎨 Color-coded results by delay severity
+## 🛠 Technical Stack  
 
-🛠 Technical Stack
-Backend (Model)
+**Backend (Model)**  
+- Python (Machine Learning & Feature Engineering)  
+- Scikit-learn (RandomForest & GradientBoosting)  
+- Pandas / NumPy  
 
-Python (Machine Learning & Feature Engineering)
+**Frontend (Demo)**  
+- HTML5 / CSS3 / JavaScript  
+- Responsive design & animations  
 
-Scikit-learn (RandomForest & GradientBoosting)
+---
 
-Pandas / NumPy
-
-Frontend (Demo)
-
-HTML5 / CSS3 / JavaScript
-
-Responsive design & animations
-
-📁 Project Structure
-bash
-Copy
-Edit
+## 📁 Project Structure  
+```
 flight-delay-predictor/
 ├── index.html                   # Demo website
 ├── README.md                    # Project documentation
@@ -64,77 +64,67 @@ flight-delay-predictor/
 └── data/
     ├── united_airlines_flights.csv
     └── merged_flight_weather.csv
-📈 Feature Engineering
-Time-Based
+```
 
-Departure/arrival time in minutes
+---
 
-Peak hour & red-eye flags
+## 📈 Feature Engineering  
 
-Day of week, seasonal patterns
+**Time-Based**
+- Departure/arrival time in minutes  
+- Peak hour & red-eye flags  
+- Day of week, seasonal patterns  
 
-Weather
+**Weather**
+- Temperature ranges & extremes  
+- Precipitation levels/types  
+- Wind speed & visibility  
+- Weather severity index  
 
-Temperature ranges & extremes
+**Route**
+- Distance & complexity  
+- Hub connections  
+- Historical route delays  
 
-Precipitation levels/types
+**Operational**
+- Flight duration  
+- Delay type breakdown  
+- Historical carrier performance  
 
-Wind speed & visibility
+---
 
-Weather severity index
+## 🎯 Use Cases  
 
-Route
+**Passengers**
+- Plan airport arrival times  
+- Choose routes with lower delay risk  
 
-Distance & complexity
+**Airlines**
+- Optimize scheduling and crew allocation  
+- Proactive delay notifications  
 
-Hub connections
+**Airports**
+- Improve gate management & staffing  
+- Enhance passenger services  
 
-Historical route delays
+---
 
-Operational
+## 🔮 Future Enhancements  
+- 📡 **Real-time weather API integration**  
+- ✈ **Multi-airline support**  
+- 🧠 **Deep learning models**  
+- 📊 **Time series modeling**  
+- 🎯 **External event impact analysis**  
 
-Flight duration
+---
 
-Delay type breakdown
+## 👥 Team  
 
-Historical carrier performance
+- **Mitchell Chen** – *Team Lead, Machine Learning Engineer*  
+  *Developed models, algorithms, and overall architecture*  
+- **Jadryan Pena** – *Data Engineer*  
+  *Data cleaning and preprocessing*  
+- **Abraham Yarba** – *Market Analyst & Technical Writer*  
+  *Market research and project documentation*  
 
-🎯 Use Cases
-Passengers
 
-Plan airport arrival times
-
-Choose routes with lower delay risk
-
-Airlines
-
-Optimize scheduling and crew allocation
-
-Proactive delay notifications
-
-Airports
-
-Improve gate management & staffing
-
-Enhance passenger services
-
-🔮 Future Enhancements
-📡 Real-time weather API integration
-
-✈ Multi-airline support
-
-🧠 Deep learning models
-
-📊 Time series modeling
-
-🎯 External event impact analysis
-
-👥 Team
-Mitchell Chen – Team Lead, Machine Learning Engineer
-Developed models, algorithms, and overall architecture
-
-Jadryan Pena – Data Engineer
-Data cleaning and preprocessing
-
-Abraham Yarba – Market Analyst & Technical Writer
-Market research and project documentation
